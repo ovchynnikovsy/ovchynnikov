@@ -2,39 +2,39 @@
 #include <cmath>
 using namespace std;
 
-// --- Задача 1: Вычисление периметра прямоугольника ---
+// --- Task 1: Calculate the perimeter of a rectangle ---
 double RectP(double x1, double y1, double x2, double y2) {
-    // Проверяем диапазон входных данных
+    // Check the range of input data
     if (x1 < -100 || x1 > 100 || y1 < -100 || y1 > 100 || 
         x2 < -100 || x2 > 100 || y2 < -100 || y2 > 100) {
-        cout << "Ошибка: координаты должны быть в диапазоне [-100, 100]!\n";
-        return -1; // Возвращаем ошибочное значение
+        cout << "Error: Coordinates must be within the range [-100, 100]!\n";
+        return -1; // Return an error value
     }
-    // Рассчитываем ширину, высоту и периметр
+    // Calculate width, height, and perimeter
     double width = abs(x2 - x1);
     double height = abs(y2 - y1);
     return 2 * (width + height);
 }
 
-// --- Задача 2: Проверка равностороннего треугольника ---
+// --- Task 2: Check if the triangle is equilateral ---
 bool isEquilateral(int a, int b, int c) {
-    // Проверяем диапазон входных данных
+    // Check the range of input data
     if (a < -100 || a > 100 || b < -100 || b > 100 || c < -100 || c > 100) {
-        cout << "Ошибка: длины сторон должны быть в диапазоне [-100, 100]!\n";
-        return false; // Считаем треугольник невалидным
+        cout << "Error: Side lengths must be within the range [-100, 100]!\n";
+        return false; // Treat the triangle as invalid
     }
-    // Проверяем, равны ли стороны
+    // Check if all sides are equal
     return a == b && b == c;
 }
 
-// --- Задача 3: Количество полных тонн ---
+// --- Task 3: Calculate the number of full tons ---
 int fullTons(int M) {
-    // Проверяем диапазон входных данных
-    if (M < -100 || M > 100) {
-        cout << "Ошибка: масса должна быть в диапазоне [-100, 100]!\n";
-        return -1; // Возвращаем ошибочное значение
+    // Check the range of input data
+    if (M < 0 || M > 100000) { // Assuming mass cannot be negative
+        cout << "Error: Mass must be within the range [0, 100000]!\n";
+        return -1; // Return an error value
     }
-    // Рассчитываем количество тонн
+    // Calculate the number of tons
     return M / 1000;
 }
 
@@ -42,59 +42,59 @@ int main() {
     int choice;
 
     do {
-        // Главное меню
-        cout << "\nВыберите задачу для выполнения:\n";
-        cout << "1. Задача 1: Вычислить периметры прямоугольников\n";
-        cout << "2. Задача 2: Проверить, является ли треугольник равносторонним\n";
-        cout << "3. Задача 3: Вычислить количество полных тонн\n";
-        cout << "0. Выход\n";
-        cout << "Ваш выбор: ";
+        // Main menu
+        cout << "\nSelect a task to execute:\n";
+        cout << "1. Task 1: Calculate the perimeter of rectangles\n";
+        cout << "2. Task 2: Check if a triangle is equilateral\n";
+        cout << "3. Task 3: Calculate the number of full tons\n";
+        cout << "0. Exit\n";
+        cout << "Your choice: ";
         cin >> choice;
 
         switch (choice) {
             case 1: {
-                // Задача 1: Периметр прямоугольников
-                cout << "Введите координаты 3 прямоугольников (x1, y1, x2, y2):\n";
+                // Task 1: Rectangle perimeter
+                cout << "Enter the coordinates of 3 rectangles (x1, y1, x2, y2):\n";
                 for (int i = 0; i < 3; i++) {
                     double x1, y1, x2, y2;
-                    cout << "Прямоугольник " << i + 1 << ": ";
+                    cout << "Rectangle " << i + 1 << ": ";
                     cin >> x1 >> y1 >> x2 >> y2;
                     double perimeter = RectP(x1, y1, x2, y2);
                     if (perimeter != -1) {
-                        cout << "Периметр: " << perimeter << endl;
+                        cout << "Perimeter: " << perimeter << endl;
                     }
                 }
                 break;
             }
             case 2: {
-                // Задача 2: Проверка равностороннего треугольника
+                // Task 2: Equilateral triangle check
                 int a, b, c;
-                cout << "Введите длины сторон треугольника (a, b, c): ";
+                cout << "Enter the sides of the triangle (a, b, c): ";
                 cin >> a >> b >> c;
                 if (isEquilateral(a, b, c)) {
-                    cout << "Треугольник равносторонний\n";
+                    cout << "The triangle is equilateral\n";
                 } else {
-                    cout << "Треугольник не равносторонний или некорректные данные\n";
+                    cout << "The triangle is not equilateral or has invalid data\n";
                 }
                 break;
             }
             case 3: {
-                // Задача 3: Количество полных тонн
+                // Task 3: Number of full tons
                 int M;
-                cout << "Введите массу в килограммах: ";
+                cout << "Enter mass in kilograms: ";
                 cin >> M;
                 int tons = fullTons(M);
                 if (tons != -1) {
-                    cout << "Количество полных тонн: " << tons << endl;
+                    cout << "Number of full tons: " << tons << endl;
                 }
                 break;
             }
             case 0:
-                // Выход из программы
-                cout << "Выход из программы.\n";
+                // Exit the program
+                cout << "Exiting the program.\n";
                 break;
             default:
-                cout << "Некорректный выбор, попробуйте снова.\n";
+                cout << "Invalid choice, please try again.\n";
         }
     } while (choice != 0);
 
